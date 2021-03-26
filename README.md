@@ -20,7 +20,7 @@ Are you sick of having to type:
 
 ```
 git checkout branch
-git add file
+git add -u
 git commit -m 'message'
 git push github branch
 git checkout master
