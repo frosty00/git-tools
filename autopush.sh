@@ -13,6 +13,10 @@ else
   git checkout -b "$id"
 fi
 git add -u
+if [[ $? == 1 ]]; then
+  echo :invalid branch name: $1"
+  exit 1
+fi
 git commit -m "$id"
 git push github
 git checkout master
