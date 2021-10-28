@@ -34,7 +34,7 @@ Usage:
 ./autopush.sh branch_name
 ```
 
-## git-delete.sh
+## clean.sh
 
 Do you have 100 branches you need to delete but don't want to type `git branch -D` 100 times?
 
@@ -43,7 +43,7 @@ You can use git-delete for an interactive prompt which asks you what branches yo
 Usage:
 
 ```
-./git-delete.sh
+./clean.sh
 
 Would you like to delete branch_name? (y/n)
 ```
