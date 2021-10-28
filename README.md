@@ -19,7 +19,7 @@ you can also change the name of the remote repository inside the script
 Are you sick of having to type:
 
 ```
-git checkout branch
+git checkout -b branch
 git add -u
 git commit -m 'message'
 git push github branch
@@ -38,7 +38,7 @@ Usage:
 
 Do you have 100 branches you need to delete but don't want to type `git branch -D` 100 times?
 
-You can use git-delete for an interactive prompt which asks you what branches you would like to delete.
+You can use `clean.sh` for an interactive prompt which asks you what branches you would like to delete.
 
 Usage:
 
