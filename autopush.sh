@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $# -ne 1 ]]; then
+if [[ $# != 1 ]]; then
   echo 'Usage autopush branch_name'
   exit 1
 fi
