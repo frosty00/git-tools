@@ -4,8 +4,8 @@ directory="$(dirname $0)"
 number=$1
 
 function usage {
-  echo 'Usage:'
-  echo '  ./checkout [number]' >&2
+  echo 'Usage:' >&2
+  echo '  ./checkout.sh [number]' >&2
 }
 
 if [ $# -ne 1 ]; then
