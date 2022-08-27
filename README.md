@@ -46,6 +46,7 @@ Usage:
 ./clean.sh
 
 Would you like to delete branch_name? (y/n)
+```
 
 ## checkout.sh
 
