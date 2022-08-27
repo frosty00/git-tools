@@ -46,4 +46,43 @@ Usage:
 ./clean.sh
 
 Would you like to delete branch_name? (y/n)
+
+## checkout.sh
+
+Are you in a rush to manage hundreds of pull requests and have the ability to push directly to other people's forks? `checkout.sh` is the perfect companion to a dev that works on multiple pull requests a day. You can simply
+
 ```
+checkout PR_NUMBER_ON_GITHUB
+git add modified_files
+git commit -m 'message'
+git push
+```
+
+and push directly to their branch! checkout.sh will fetch metadata from github including and set the upstream branch correctly. It will also create a remote repo with the user's github username for your convenience.
+
+```
+> checkout 14798
+
+> git remote -v
+
+origin    https://github.com/ccxt/ccxt (fetch)
+origin    https://github.com/ccxt/ccxt (push)
+...
+# newly added repo below
+ttodua    https://github.com/ttodua/ccxt.git (fetch)
+ttodua    https://github.com/ttodua/ccxt.git (push)
+```
+
+The github repo to fetch the pull request data is detected automatically from the `origin` remote so there is no need to configure this script.
+
+### checkout.sh installation guide
+
+```
+git clone https://github.com/frosty00/git-tools.git
+cd git-tools
+npm install .
+ln -s "$(pwd)/checkout.sh" /usr/local/bin/checkout
+ln -s "$(pwd)/get-metadata.js" /usr/local/bin/
+```
+
+And you will be able to checkout any pull request by simply typing `checkout PR_NUMBER` inside of a local git repository.

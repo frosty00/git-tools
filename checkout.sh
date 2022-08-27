@@ -2,6 +2,7 @@
 
 directory="$(dirname $0)"
 number=$1
+metadata="$directory/get-metadata.js"
 
 function usage {
   echo 'Usage:' >&2
@@ -18,17 +19,22 @@ if ! [ -d .git ]; then
   exit 2
 fi
 
+if ! [ -f "$metadata" ]; then
+  echo "cannot find get-metadata.js, ensure both files are in the same directory" >&2
+  exit 3
+fi
+
 origin=$(git remote -v | grep origin | head -n 1 | awk '{ print $2 }')
 
 if ! [[ $origin =~ ^"https://" ]]; then
   echo "failed to detect repo, please add an origin remote branch tracking a https git repo" >&2
-  exit 3
+  exit 4
 fi
 
 owner=$(echo $origin | cut -d / -f4)
 repo=$(echo $origin | cut -d / -f5)
 
-result="$(node $directory/get-metadata.js $owner $repo $number)"
+result="$(node $metadata $owner $repo $number)"
 exit_code=$?
 
 if [ $exit_code -ne 0 ]; then
@@ -38,13 +44,12 @@ fi
 
 read remote_branch user_login remote_repo commit_hash <<<"$result"
 
-echo $remote_repo
-if ! [ $(git remote -v | grep $remote_repo > /dev/null ) ]; then
-  echo "adding remote repository $user_login - $remote_repo"
+if ! $(git remote -v | grep -q $remote_repo); then
+  echo "adding remote repository for $user_login: $remote_repo"
   git remote add $user_login $remote_repo
 fi
 
-echo "fetching $user_login branches..."
+echo "fetching $user_login's fork's branches..."
 git fetch -q $user_login
 git switch -c $remote_branch $commit_hash
 git branch -q --set-upstream-to "$user_login/$remote_branch"
