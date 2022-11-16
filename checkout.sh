@@ -56,7 +56,7 @@ if git show-ref --quiet refs/heads/"$remote_branch"; then
 else
   echo "fetching $user_login's fork's branches..."
   git fetch -q $user_login
-  git switch -c $remote_branch "$user_login/$remote_branch" --track=direct
+  git switch -c "$remote_branch" "$user_login/$remote_branch" --track=direct
 fi
 
 git show -s HEAD --format=oneline
