@@ -50,9 +50,8 @@ if ! $(git remote -v | grep -q $remote_repo); then
 fi
 
 if git show-ref --quiet refs/heads/"$remote_branch"; then
-  echo "remote branch already exists"
-  git checkout "$remote_branch"
-  git merge "$user_login/$remote_branch"
+  git checkout -q "$remote_branch"
+  git merge -q "$user_login/$remote_branch"
 else
   echo "fetching $user_login's fork's branches..."
   git fetch -q $user_login
