@@ -79,11 +79,7 @@ The github repo to fetch the pull request data is detected automatically from th
 ### checkout.sh installation guide
 
 ```
-git clone https://github.com/frosty00/git-tools.git
-cd git-tools
-npm install .
 ln -s "$(pwd)/checkout.sh" /usr/local/bin/checkout
-ln -s "$(pwd)/get-metadata.js" /usr/local/bin/
 ```
 
 And you will be able to checkout any pull request by simply typing `checkout PR_NUMBER` inside of a local git repository.
