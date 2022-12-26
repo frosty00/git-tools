@@ -46,7 +46,6 @@ if [ $exit_code -ne 0 ]; then
 fi
 
 read -d '\n' remote_branch user_login remote_repo commit_hash <<< "$result"
-echo "$remote_branch $user_login $remote_repo $commit_hash"
 
 if ! $(git remote | grep -q $user_login); then
   user_remote="git@github.com:$user_login/$repo.git"
