@@ -1,6 +1,6 @@
 # git-tools
 
-## prune.sh
+### prune.sh
 
 Are you sick of getting conflicts and failing to push because a stale branch exists on GitHub already?
 
@@ -14,7 +14,7 @@ Usage:
 
 you can also change the name of the remote repository inside the script
 
-## autopush.sh
+### autopush.sh
 
 Are you sick of having to type:
 
@@ -34,7 +34,7 @@ Usage:
 ./autopush.sh branch_name
 ```
 
-## clean.sh
+### clean.sh
 
 Do you have 100 branches you need to delete but don't want to type `git branch -D` 100 times?
 
@@ -48,7 +48,7 @@ Usage:
 Would you like to delete branch_name? (y/n)
 ```
 
-## checkout.sh
+### checkout.sh
 
 Are you in a rush to manage hundreds of pull requests and have the ability to push directly to other people's forks? `checkout.sh` is the perfect companion to a dev that works on multiple pull requests a day. You can simply
 
@@ -59,7 +59,7 @@ git commit -m 'message'
 git push
 ```
 
-and push directly to their branch! checkout.sh will fetch metadata from github including and set the upstream branch correctly. It will also create a remote repo with the user's github username for your convenience.
+and push directly to their branch! checkout.sh will fetch metadata from github to set the upstream branch correctly. It will also create a remote repo with the user's github username for your convenience.
 
 ```
 > checkout 14798
@@ -76,7 +76,7 @@ ttodua    https://github.com/ttodua/ccxt.git (push)
 
 The github repo to fetch the pull request data is detected automatically from the `origin` remote so there is no need to configure this script.
 
-### checkout.sh installation guide
+#### checkout.sh installation guide
 
 ```
 ln -s "$(pwd)/checkout.sh" /usr/local/bin/checkout
@@ -84,7 +84,7 @@ ln -s "$(pwd)/checkout.sh" /usr/local/bin/checkout
 
 And you will be able to checkout any pull request by simply typing `checkout PR_NUMBER` inside of a local git repository.
 
-## git-use-ssh.sh
+### git-use-ssh.sh
 
 This will automatically convert the origin remote repo from a https github remote repository to a ssh github remote repository, automatically handling any access tokens. This is useful if you use ssh keys to authenticate with github.
 
