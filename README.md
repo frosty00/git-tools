@@ -86,7 +86,9 @@ And you will be able to checkout any pull request by simply typing `checkout PR_
 
 ## git-use-ssh.sh
 
-This will automatically convert the origin remote repo from a https github remote repository to a ssh github remote repository, automatically handling any access tokens. This is useful if you use ssh keys to authenticate with github. Usage:
+This will automatically convert the origin remote repo from a https github remote repository to a ssh github remote repository, automatically handling any access tokens. This is useful if you use ssh keys to authenticate with github.
+
+Usage:
 
 ```
 > cd git-repo/
