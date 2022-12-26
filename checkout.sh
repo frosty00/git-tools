@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-directory="$(dirname $0)"
 number=$1
 
 function usage {
