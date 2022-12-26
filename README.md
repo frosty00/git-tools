@@ -14,6 +14,8 @@ Usage:
 
 you can also change the name of the remote repository inside the script
 
+---
+
 ### autopush.sh
 
 Are you sick of having to type:
@@ -34,6 +36,8 @@ Usage:
 ./autopush.sh branch_name
 ```
 
+---
+
 ### clean.sh
 
 Do you have 100 branches you need to delete but don't want to type `git branch -D` 100 times?
@@ -47,6 +51,8 @@ Usage:
 
 Would you like to delete branch_name? (y/n)
 ```
+
+---
 
 ### checkout.sh
 
@@ -83,6 +89,8 @@ ln -s "$(pwd)/checkout.sh" /usr/local/bin/checkout
 ```
 
 And you will be able to checkout any pull request by simply typing `checkout PR_NUMBER` inside of a local git repository.
+
+---
 
 ### git-use-ssh.sh
 
