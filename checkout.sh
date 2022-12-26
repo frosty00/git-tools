@@ -38,7 +38,7 @@ else
 fi
 
 url="https://api.github.com/repos/$owner/$repo/pulls/$number"
-result=$(curl -s -f -H 'Content-Type: application/json' $url | jq '.head.ref, .user.login, .base.repo.ssh_url, .head.sha' | sed 's/"//g')
+result=$(curl -s -f -H 'Content-Type: application/json' $url | jq '.head.ref, .user.login, .base.repo.ssh_url, .head.sha' | sed 's/"//g'; exit ${PIPESTATUS[0]})
 exit_code=$?
 if [ $exit_code -ne 0 ]; then
   echo "failed to fetch metadata for $url" >&2
@@ -56,10 +56,22 @@ fi
 
 echo "fetching $user_login's fork's branches..."
 git fetch -q $user_login
-if git show-ref -q refs/heads/"$remote_branch"; then
+
+
+function has_local_branch {
+  git show-ref -q refs/heads/"$remote_branch"
+}
+
+function has_remote_branch {
+  git show-ref -q refs/heads/"$user_login/$remote_branch"
+}
+
+if has_local_branch; then
   git checkout -q "$remote_branch"
-  git merge -q "$user_login/$remote_branch"
-elif git show-ref -q refs/heads/"$user_login/$remote_branch"; then
+  if has_remote_branch; then
+    git merge -q "$user_login/$remote_branch"
+  fi
+elif has_remote_branch; then
   git switch -c "$remote_branch" "$user_login/$remote_branch" --track=direct
 else
   git switch -c "$remote_branch" "$commit_hash"
