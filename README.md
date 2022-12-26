@@ -87,3 +87,35 @@ ln -s "$(pwd)/get-metadata.js" /usr/local/bin/
 ```
 
 And you will be able to checkout any pull request by simply typing `checkout PR_NUMBER` inside of a local git repository.
+
+## git-use-ssh.sh
+
+This will automatically convert the origin remote repo from a https github remote repository to a ssh github remote repository, automatically handling any access tokens. This is useful if you use ssh keys to authenticate with github. Usage:
+
+```
+> cd git-repo/
+> git remote -v
+
+origin	https://frosty00:ghp_ninadffFdnndsnfsdfadsfas@github.com/cs169/fa22-actionmap-fa22-43.git (fetch)
+origin	https://frosty00:ghp_ninadffFdnndsnfsdfadsfas@github.com/cs169/fa22-actionmap-fa22-43.git (push)
+
+> ./git-use-ssh.sh
+> git remote -v
+
+origin	git@github.com:cs169/fa22-actionmap-fa22-43.git (fetch)
+origin	git@github.com:cs169/fa22-actionmap-fa22-43.git (push)
+```
+
+Make sure to add your ssh public key to github by doing:
+
+```
+# if your key exists
+cat ~/.ssh/github_rsa.pub
+
+# if you need to generate a key
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/github_rsa
+
+cat ~/.ssh/github_rsa.pub
+```
+
+And then copy the key to your github profile settings under https://github.com/settings/keys
