@@ -53,10 +53,6 @@ if ! $(git remote | grep -q $user_login); then
   git remote add $user_login $user_remote
 fi
 
-echo "fetching $user_login's fork's branches..."
-git fetch -q $user_login
-
-
 function has_local_branch {
   git show-ref -q refs/heads/"$remote_branch"
 }
@@ -64,6 +60,9 @@ function has_local_branch {
 function has_remote_branch {
   git show-ref -q refs/heads/"$user_login/$remote_branch"
 }
+
+echo "fetching $user_login's fork's branches..."
+git fetch -q $user_login
 
 if has_local_branch; then
   git checkout -q "$remote_branch"
