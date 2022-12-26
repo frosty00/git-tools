@@ -16,7 +16,6 @@ if [[ $? != 0 ]]; then
   echo "invalid branch name: $1"
   exit 1
 fi
-git add -u
-git commit -m "$id"
+git commit -am "$id"
 git push github
 git checkout master
