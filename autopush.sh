@@ -17,5 +17,5 @@ if [[ $? != 0 ]]; then
   exit 1
 fi
 git commit -am "$id"
-git push github
+git push -u github
 git checkout master
