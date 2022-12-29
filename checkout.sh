@@ -57,7 +57,7 @@ function has_local_branch {
 }
 
 function has_remote_branch {
-  git show-ref -q refs/heads/"$user_login/$remote_branch"
+  git show-ref -q refs/remotes/"$user_login/$remote_branch"
 }
 
 echo "fetching $user_login's fork's branches..."
@@ -68,9 +68,12 @@ if has_local_branch; then
   if has_remote_branch; then
     git merge -q "$user_login/$remote_branch"
   fi
+  echo "local"
 elif has_remote_branch; then
+  echo "has remote"
   git switch -c "$remote_branch" "$user_login/$remote_branch" --track=direct
 else
+  echo "else"
   git switch -c "$remote_branch" "$commit_hash"
 fi
 
