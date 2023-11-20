@@ -34,7 +34,7 @@ else
   exit 4
 fi
 
-body=$(jq --null-input --arg title "$id" --arg head "frosty00:$id" --arg base "master" '{ $title, $head, $base }')
+body=$(jq --null-input --arg title "${id//-/ }" --arg head "frosty00:$id" --arg base "master" '{ $title, $head, $base }')
 echo "$body"
 curl \
   -X POST \
@@ -42,4 +42,4 @@ curl \
   -H "Authorization: Bearer $GITHUB_AUTH_TOKEN"\
   -H "X-GitHub-Api-Version: 2022-11-28" \
   "https://api.github.com/repos/$owner/$repo/pulls" \
-  -d "$body"
+  -d "$body" | jq '._links.html.href'
