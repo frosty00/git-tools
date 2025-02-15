@@ -45,6 +45,7 @@ if [ $exit_code -ne 0 ]; then
 fi
 
 read -d '\n' remote_branch user_login remote_repo commit_hash <<< "$result"
+local_branch="${user_login}_${remote_branch}"
 
 if ! $(git remote | grep -q $user_login); then
   user_remote="git@github.com:$user_login/$repo.git"
@@ -53,7 +54,7 @@ if ! $(git remote | grep -q $user_login); then
 fi
 
 function has_local_branch {
-  git show-ref -q refs/heads/"$remote_branch"
+  git show-ref -q refs/heads/"$local_branch"
 }
 
 function has_remote_branch {
@@ -64,17 +65,17 @@ echo "fetching $user_login's fork's branches..."
 git fetch -q $user_login
 
 if has_local_branch; then
-  git checkout -q "$remote_branch"
+  git checkout -q "$local_branch"
   if has_remote_branch; then
     git merge -q "$user_login/$remote_branch"
   fi
   echo "local"
 elif has_remote_branch; then
   echo "has remote"
-  git switch -c "$remote_branch" "$user_login/$remote_branch" --track=direct
+  git switch -c "$local_branch" "$user_login/$remote_branch" --track=direct
 else
   echo "else"
-  git switch -c "$remote_branch" "$commit_hash"
+  git switch -c "$local_branch" "$commit_hash"
 fi
 
 git show -s HEAD --format=oneline
