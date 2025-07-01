@@ -31,6 +31,7 @@ elif [[ $origin =~ ^git\@github\.com ]]; then
   path=$(cut -d : -f2 <<< $origin)
   owner=$(cut -d / -f1 <<< $path)
   repo=$(cut -d / -f2 <<< $path)
+  repo=${repo%%.git}
 else
   echo "invalid origin repo - $origin, please add an origin remote branch tracking a git repo" >&2
   exit 4
@@ -45,7 +46,7 @@ if [ $exit_code -ne 0 ]; then
 fi
 
 read -d '\n' remote_branch user_login remote_repo commit_hash <<< "$result"
-local_branch="${user_login}_${remote_branch}"
+local_branch="${remote_branch}"
 
 if ! $(git remote | grep -q $user_login); then
   user_remote="git@github.com:$user_login/$repo.git"
